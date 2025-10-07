@@ -43,5 +43,7 @@ namespace OmahRealEstate.Web.Data.Entities
         public int Bathrooms { get; set; }
 
         public int Rooms { get; set; }
+
+        public User Owner { get; set; }
     }
 }

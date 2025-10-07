@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using OmahRealEstate.Web.Data;
 using OmahRealEstate.Web.Data.Entities;
 using OmahRealEstate.Web.Data.Repositories.Interfaces;
+using OmahRealEstate.Web.Helpers;
 
 namespace OmahRealEstate.Web.Controllers
 {

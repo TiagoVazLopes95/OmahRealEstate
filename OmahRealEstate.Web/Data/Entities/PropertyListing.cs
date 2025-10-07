@@ -8,6 +8,8 @@ namespace OmahRealEstate.Web.Data.Entities
 
         public Property Property { get; set; }
 
+        public User Agent { get; set; }
+
         public string Location => Property.Municipality;
 
         public string Title { get; set; }
