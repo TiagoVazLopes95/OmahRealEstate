@@ -1,0 +1,137 @@
+﻿@model IEnumerable<OmahRealEstate.Web.Data.Entities.Property>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PropertyType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Parish)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.District)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Municipality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Floor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Door)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GrossArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LivingArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrivateGrossArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalLotSize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConstructionYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkingLot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Elevator)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Garage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bathrooms)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rooms)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PropertyType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Parish)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.District)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Municipality)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Floor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Door)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GrossArea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LivingArea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrivateGrossArea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalLotSize)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConstructionYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkingLot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Elevator)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Garage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bathrooms)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rooms)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
