@@ -20,6 +20,7 @@ namespace OmahRealEstate.Web
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddTransient<SeedDb>();
             builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
             builder.Services.AddScoped<IPropertyListingRepository, PropertyListingRepository>();
 
@@ -44,7 +45,16 @@ namespace OmahRealEstate.Web
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var seeder = scope.ServiceProvider.GetRequiredService<SeedDb>();
+                seeder.SeedAsync().Wait();
+            }
+
+
             app.Run();
         }
+
     }
 }
