@@ -1,52 +1,259 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+
+	<!-- MOBILE SPECIFIC -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - OmahRealEstate.Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
     <link rel="stylesheet" href="~/OmahRealEstate.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/vendor/jqvmap/css/jqvmap.min.css" />
+    <link rel="stylesheet" href="~/vendor/owl-carousel/owl.carousel.css" />
+    <link rel="stylesheet" href="~/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link rel="icon" type="image/png" sizes="16x16" href="~/images/favicon.png" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">OmahRealEstate.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Properties" asp-action="Index">Properties</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+	<!--**********************************
+		Main wrapper start
+	***********************************-->
+	<div id="main-wrapper">
+
+		<!--**********************************
+			Nav header start
+		***********************************-->
+		<div class="nav-header">
+			<a href="index.html" class="brand-logo">
+				<img class="logo-abbr" src="~/images/logo.png" alt="/">
+				<img class="logo-compact" src="~/images/logo-text.png" alt="/">
+				<img class="brand-title" src="~/images/logo-text.png" alt="/">
+			</a>
+
+			<div class="nav-control">
+				<div class="hamburger">
+					<span class="line"></span><span class="line"></span><span class="line"></span>
+				</div>
+			</div>
+		</div>
+		<!--**********************************
+			Nav header end
+		***********************************-->
+
+		<!--**********************************
+			Header start
+		***********************************-->
+		<div class="header">
+			<div class="header-content">
+				<nav class="navbar navbar-expand">
+					<div class="collapse navbar-collapse justify-content-between">
+						<div class="header-left">
+							<div class="dashboard_bar">
+								<div class="search_bar dropdown">
+									<div class="dropdown-menu p-0 m-0">
+										<form>
+											<div class="input-group search-area d-xl-inline-flex d-none">
+												<input class="form-control" type="text" placeholder="Search Here" aria-label="Search">
+												<button class="input-group-text">
+													<span class="search_icon p-3 c-pointer">
+														<svg class="ms-1" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+															<path d="M23.7871 22.7761L17.9548 16.9437C19.5193 15.145 20.4665 12.7982 20.4665 10.2333C20.4665 4.58714 15.8741 0 10.2333 0C4.58714 0 0 4.59246 0 10.2333C0 15.8741 4.59246 20.4665 10.2333 20.4665C12.7982 20.4665 15.145 19.5193 16.9437 17.9548L22.7761 23.7871C22.9144 23.9255 23.1007 24 23.2816 24C23.4625 24 23.6488 23.9308 23.7871 23.7871C24.0639 23.5104 24.0639 23.0528 23.7871 22.7761ZM1.43149 10.2333C1.43149 5.38004 5.38004 1.43681 10.2279 1.43681C15.0812 1.43681 19.0244 5.38537 19.0244 10.2333C19.0244 15.0812 15.0812 19.035 10.2279 19.035C5.38004 19.035 1.43149 15.0865 1.43149 10.2333Z" fill="#3B4CB8" />
+														</svg>
+													</span>
+												</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						@if(this.User.Identity.IsAuthenticated)
+						{
+							<ul class="navbar-nav header-right">
+								<li class="nav-item dropdown header-profile">
+									<a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
+										<div class="header-info">
+											<span class="text-black">@this.User.Identity.Name</span>
+											<p class="fs-12 mb-0">@* @User.FindFirst("role")?.Value *@</p>
+										</div>
+										<img src="~/images/profile/userMenuIcon.png" width="20" alt="/">
+									</a>
+									<div class="dropdown-menu dropdown-menu-end">
+										<a href="./app-profile.html" class="dropdown-item ai-icon">
+											<svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+											<span class="ms-2">Profile </span>
+										</a>
+										<a href="./email-inbox.html" class="dropdown-item ai-icon">
+											<svg id="icon-inbox" xmlns="http://www.w3.org/2000/svg" class="text-success" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+											<span class="ms-2">Inbox </span>
+										</a>
+										<a asp-controller="Account" asp-action="Logout" class="dropdown-item ai-icon">
+											<svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+											<span class="ms-2">Logout </span>
+										</a>
+									</div>
+								</li>
+							</ul>
+						}
+						else
+						{
+							<ul class="navbar-nav header-right">
+								<li class="nav-item header-profile">
+										<a asp-area="" asp-controller="Account" asp-action="Login">
+											<img src="~/images/profile/login_Icon.png" />
+										</a>
+								</li>
+							</ul>
+						}
+
+					</div>
+				</nav>
+			</div>
+		</div>
+		<!--**********************************
+			Header end ti-comment-alt
+		***********************************-->
+		<!--**********************************
+			Sidebar start
+		***********************************-->
+		<div class="deznav">
+			<div class="deznav-scroll">
+				<ul class="metismenu" id="menu">
+					<li>
+						<a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-dashboard-1"></i>
+							<span class="nav-text">Dashboard</span>
+						</a>
+						<ul aria-expanded="false">
+							<li><a href="index.html">Dashboard</a></li>
+							<li><a href="analytics.html">Analytics</a></li>
+							<li><a href="review.html">Review</a></li>
+							<li><a href="order-list.html">Order List</a></li>
+							<li><a href="customer-list.html">Customer</a></li>
+
+						</ul>
+					</li>
+					<li>
+						<a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+							<i class="flaticon-381-user-7"></i>
+							<span class="nav-text">Agents</span>
+
+						</a>
+						<ul aria-expanded="false">
+							<li><a href="add-agent.html">Add Agent</a></li>
+							<li><a href="add-agent-wizard.html">Add Agent Wizard</a></li>
+							<li><a href="all-agents.html">All Agents</a></li>
+							<li><a href="agent-profile.html">Agent Profile</a></li>
+
+						</ul>
+					</li>
+					<li>
+						<a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+							<i class="flaticon-381-layer-1"></i>
+							<span class="nav-text">Property</span>
+
+						</a>
+						<ul aria-expanded="false">
+							<li><a href="add-property.html">Add Property</a></li>
+							<li><a href="property-list.html">Property List</a></li>
+							<li><a href="property-details.html">Property Details</a></li>
+
+						</ul>
+					</li>
+					
+
+				<div class="copyright">
+					<p><strong>Omah Dashboard</strong> © <span class="current-year">2025</span> All Rights Reserved</p>
+					<p>by DexignZone</p>
+				</div>
+			</div>
+		</div>
+		<!--**********************************
+			Sidebar end
+		***********************************-->
+
+		
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - OmahRealEstate.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+		<!--Core dependencies -->
+		<script src="~/lib/jquery/dist/jquery.min.js"></script>
+		<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+		<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+
+		<!-- Required vendors -->
+		<script src="~/vendor/global/global.min.js"></script>
+		<script src="~/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+        <script src="~/vendor/chartjs/chart.bundle.min.js"></script>
+		<script src="~/vendor/owl-carousel/owl.carousel.js"></script>
+
+		<!-- Apex Chart -->
+		<script src="~/vendor/apexchart/apexchart.js"></script>
+		<!-- Vectormap -->
+		<script src="~/vendor/jqvmap/js/jquery.vmap.min.js"></script>
+		<script src="~/vendor/jqvmap/js/jquery.vmap.world.js"></script>
+		<script src="~/vendor/jqvmap/js/jquery.vmap.usa.js"></script>
+
+		<!-- Chart piety plugin files -->
+		<script src="~/vendor/peity/jquery.peity.min.js"></script>
+
+		<script src="~/js/dashboard/dashboard-1.js"></script>
+		<script src="~/js/custom.min.js"></script>
+		<script src="~/js/deznav-init.js"></script>
+
+
+
+		<script>
+			function carouselReview() {
+				jQuery('.testimonial-one').owlCarousel({
+					loop: true,
+					autoplay: true,
+					margin: 0,
+					nav: true,
+					dots: false,
+					navText: ['<i class="las la-long-arrow-alt-left"></i>', '<i class="las la-long-arrow-alt-right"></i>'],
+					responsive: {
+						0: { items: 1 },
+						480: { items: 1 },
+						767: { items: 1 },
+						1000: { items: 1 }
+					}
+				});
+				jQuery('#next-slide').on('click', function () {
+					$('.testimonial-one').trigger('next.owl.carousel');
+				});
+				jQuery('#prev-slide').on('click', function () {
+					$('.testimonial-one').trigger('prev.owl.carousel');
+				});
+			}
+			jQuery(window).on('load', function () {
+				setTimeout(function () {
+					carouselReview();
+				}, 1000);
+			});
+		</script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
