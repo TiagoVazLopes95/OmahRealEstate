@@ -1,0 +1,267 @@
+﻿@model OmahRealEstate.Web.Models.ChangeUserViewModel
+@{
+	Layout = "_Layout";
+}
+
+	<!-- Title -->
+	<title>Omah - Real Estate Admin Dashboard Template</title>
+
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="author" content="DexignZone">
+	<meta name="robots" content="index, follow">
+
+	<meta name="keywords" content="admin, dashboard, admin dashboard, admin template, template, admin panel, administration, analytics, bootstrap, hospital admin, modern, property, real estate, responsive, creative, retina ready, modern Dashboard">
+	<meta name="description" content="Your Ultimate Real Estate Admin Dashboard Template. Streamline property management, analyze market trends, and boost productivity with our intuitive and feature-rich solution. Elevate your real estate business today!">
+
+	<meta property="og:title" content="Omah - Real Estate Admin Dashboard Template">
+	<meta property="og:description" content="Your Ultimate Real Estate Admin Dashboard Template. Streamline property management, analyze market trends, and boost productivity with our intuitive and feature-rich solution. Elevate your real estate business today!">
+	<meta property="og:image" content="https://omah.dexignzone.com/xhtml/social-image.png">
+	<meta name="format-detection" content="telephone=no">
+
+	<meta name="twitter:title" content="Omah - Real Estate Admin Dashboard Template">
+	<meta name="twitter:description" content="Your Ultimate Real Estate Admin Dashboard Template. Streamline property management, analyze market trends, and boost productivity with our intuitive and feature-rich solution. Elevate your real estate business today!">
+	<meta name="twitter:image" content="https://omah.dexignzone.com/xhtml/social-image.png">
+	<meta name="twitter:card" content="summary_large_image">
+
+	<!-- Select2 CSS -->
+	
+	<link rel="stylesheet" href="~/vendor/select2/css/select2.min.css">
+	<link href="~/css/style.css" rel="stylesheet">
+
+	<!-- MOBILE SPECIFIC -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<div class="content-body">
+		<div class="container-fluid">
+			<div class="page-titles">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">Account</li>
+					<li class="breadcrumb-item active"><a asp-controller="Account" asp-action="UserProfile">Profile</a></li>
+				</ol>
+			</div>
+			<!-- row -->
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="profile card card-body px-3 pt-3 pb-0">
+						<div class="profile-head">
+							<div class="photo-content">
+								<div class="cover-photo rounded"></div>
+							</div>
+							<div class="profile-info">
+								<div class="profile-photo">
+									<img src="~/images/profile/profile.png" class="img-fluid rounded-circle" alt="/">
+								</div>
+								<div class="profile-details">
+									<div class="profile-name px-3 pt-2">
+									<h4 class="text-primary mb-0">@($"{this.User.FindFirst("FirstName")?.Value} {this.User.FindFirst("LastName")?.Value}")</h4>
+									<p>Role@* @User.FindFirst("role")?.Value *@</p>
+									</div>
+									<div class="profile-email px-2 pt-2">
+										<h4 class="text-muted mb-0">@this.User.Identity.Name</h4>
+										<p>Email</p>
+									</div>
+									<div class="dropdown ms-auto">
+										<a href="javascript:void(0);" class="btn btn-primary light sharp" data-bs-toggle="dropdown" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg></a>
+										<ul class="dropdown-menu dropdown-menu-end" style="">
+											<li class="dropdown-item"><i class="fa fa-user-circle text-primary me-2"></i> View profile</li>
+											<li class="dropdown-item"><i class="fa fa-users text-primary me-2"></i> Add to btn-close friends</li>
+											<li class="dropdown-item"><i class="fa fa-plus text-primary me-2"></i> Add to group</li>
+											<li class="dropdown-item"><i class="fa fa-ban text-primary me-2"></i> Block</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xl-12">
+					<div class="card h-auto">
+						<div class="card-body">
+							<div class="profile-tab">
+								<div class="custom-tab-1">
+									<ul class="nav nav-tabs" role="tablist" id="p-tabs">
+										<li class="nav-item" role="presentation">
+											<a href="#about-me" data-bs-toggle="tab" class="nav-link active" aria-selected="true" role="tab">About Me</a>
+										</li>
+										<li class="nav-item" role="presentation">
+											<a href="#profile-settings" data-bs-toggle="tab" class="nav-link" aria-selected="false" role="tab" tabindex="-1">Setting</a>
+										</li>
+									</ul>
+									<div class="tab-content">
+										<div id="about-me" class="tab-pane fade active show" role="tabpanel">
+											<div class="profile-about-me">
+												<div class="pt-4 border-bottom-1 pb-3">
+													<h4 class="text-primary">About Me</h4>
+													<p class="mb-2">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence was created for the bliss of souls like mine.I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents.</p>
+													<p>A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame.</p>
+												</div>
+											</div>
+											<div class="profile-skills mb-5">
+												<h4 class="text-primary mb-2">Skills</h4>
+												<a href="javascript:void(0);" class="btn btn-primary light btn-xs mb-1">Admin</a>
+												<a href="javascript:void(0);" class="btn btn-primary light btn-xs mb-1">Dashboard</a>
+												<a href="javascript:void(0);" class="btn btn-primary light btn-xs mb-1">Photoshop</a>
+												<a href="javascript:void(0);" class="btn btn-primary light btn-xs mb-1">Bootstrap</a>
+												<a href="javascript:void(0);" class="btn btn-primary light btn-xs mb-1">Responsive</a>
+												<a href="javascript:void(0);" class="btn btn-primary light btn-xs mb-1">Crypto</a>
+											</div>
+											<div class="profile-lang  mb-5">
+												<h4 class="text-primary mb-2">Language</h4>
+												<a href="javascript:void(0);" class="text-muted pe-3 f-s-16"><i class="flag-icon flag-icon-us"></i> English</a>
+												<a href="javascript:void(0);" class="text-muted pe-3 f-s-16"><i class="flag-icon flag-icon-fr"></i> French</a>
+												<a href="javascript:void(0);" class="text-muted pe-3 f-s-16"><i class="flag-icon flag-icon-bd"></i> Bangla</a>
+											</div>
+											<div class="profile-personal-info">
+												<h4 class="text-primary mb-4">Personal Information</h4>
+												<div class="row mb-2">
+													<div class="col-sm-3 col-5">
+														<h6 class="f-w-500">
+															Name <span class="pull-end">:</span>
+														</h6>
+													</div>
+													<div class="col-sm-9 col-7">
+													<span>@($"{this.User.FindFirst("FirstName")?.Value} {this.User.FindFirst("LastName")?.Value}")</span>
+													</div>
+												</div>
+												<div class="row mb-2">
+													<div class="col-sm-3 col-5">
+														<h6 class="f-w-500">
+															Email <span class="pull-end">:</span>
+														</h6>
+													</div>
+													<div class="col-sm-9 col-7">
+														<span>@this.User.Identity.Name</span>
+													</div>
+												</div>
+												<div class="row mb-2">
+													<div class="col-sm-3 col-5">
+														<h6 class="f-w-500">Availability <span class="pull-end">:</span></h6>
+													</div>
+													<div class="col-sm-9 col-7">
+														<span>-</span>
+													</div>
+												</div>
+												<div class="row mb-2">
+													<div class="col-sm-3 col-5">
+														<h6 class="f-w-500">
+															Age <span class="pull-end">:</span>
+														</h6>
+													</div>
+													<div class="col-sm-9 col-7">
+														<span>-</span>
+													</div>
+												</div>
+												<div class="row mb-2">
+													<div class="col-sm-3 col-5">
+														<h6 class="f-w-500">Location <span class="pull-end">:</span></h6>
+													</div>
+													<div class="col-sm-9 col-7">
+														<span>
+															-
+														</span>
+													</div>
+												</div>
+												<div class="row mb-2">
+													<div class="col-sm-3 col-5">
+														<h6 class="f-w-500">Year Experience <span class="pull-end">:</span></h6>
+													</div>
+													<div class="col-sm-9 col-7">
+														<span>-</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div id="profile-settings" class="tab-pane fade" role="tabpanel">
+											<div class="pt-3">
+												<div class="settings-form">
+													<h4 class="text-primary">Account Setting</h4>
+												<form method="post">
+													<div class="row">
+														<div class="mb-3 col-md-6">
+															<label asp-for="FirstName" class="form-label">First Name</label>
+															<input asp-for="FirstName" type="text" placeholder="Name" class="form-control">
+															<span asp-validation-for="FirstName" class="text-warning"></span>
+														</div>
+														<div class="mb-3 col-md-6">
+															<label asp-for="LastName" class="form-label">Last Name</label>
+															<input asp-for="LastName" type="text" placeholder="Surname" class="form-control">
+															<span asp-validation-for="LastName" class="text-warning"></span>
+														</div>
+													</div>
+													<div class="row">
+														<div class="mb-3 col-md-6">
+															<label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+															<input asp-for="PhoneNumber" type="tel" placeholder="Phone" class="form-control">
+															<span asp-validation-for="PhoneNumber" class="text-warning"></span>
+														</div>
+													</div>
+@* 													<div class="row">
+														<div>
+															<div class="col-xl-6" style="border-color:lightgrey;border-style:solid;border-radius: 10px;border-width: thin">
+																<div>
+																	<label class="form-label">Languages</label>
+																	<div class="mb-3">
+																		<select class="select2-width-50" style="width: 50%">
+																			<option value="AL">Alabama</option>
+																			<option value="WY">Wyoming</option>
+																		</select>
+																	</div>
+																	<div class="mb-3">
+																		<select class="select2-width-75" multiple="multiple" style="width: 75%">
+																			<option value="AL">Alabama</option>
+																			<option value="WY">Wyoming</option>
+																		</select>
+																	</div>
+																</div>																														
+															</div>
+														</div>
+													</div> *@
+														<input class="btn btn-primary" type="submit" value="Save Changes"/>												
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+
+	<script>
+		$(function() {
+			var tab = '@ViewData["ActiveTab"]';
+			if (tab.length > 0) {
+				var profileSettings = document.querySelector('#p-tabs a[href="#' + tab + '"]');
+
+				if(profileSettings) {
+					var tabInstance = new bootstrap.Tab(profileSettings);
+					tabInstance.show();
+
+					var firstError = document.querySelector('.input-validation-error');
+
+					if(firstError) {
+						firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+						firstError.focus();
+					}
+				}				
+			}
+		});
+	</script>
+}
+

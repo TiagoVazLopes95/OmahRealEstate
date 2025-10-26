@@ -32,7 +32,7 @@ namespace OmahRealEstate.Web.Data
                     FirstName = "Tiago",
                     LastName = "Lopes",
                     Email = "demoappemail.255@gmail.com",
-                    UserName = "demoappemail.255@gmail.com"
+                    UserName = "demoappemail.255@gmail.com",
                 };
 
                 var result = await _userHelper.AddUserAsync(user,"123456");

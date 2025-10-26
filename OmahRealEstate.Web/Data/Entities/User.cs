@@ -10,6 +10,10 @@ namespace OmahRealEstate.Web.Data.Entities
 
         public string FullName => $"{FirstName} {LastName}";
 
+        //public string AboutMe { get; set; }
 
+        //public Agency Agency { get; set; }
+
+        //public IEnumerable<Language> Languages { get; set; };
     }
 }

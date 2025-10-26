@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OmahRealEstate.Web.Data.Entities;
 using OmahRealEstate.Web.Helpers;
 using OmahRealEstate.Web.Models;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace OmahRealEstate.Web.Controllers
@@ -35,6 +36,10 @@ namespace OmahRealEstate.Web.Controllers
 
                 if(result.Succeeded)
                 {
+                    var user = await _userHelper.GetUserByEmailAsync(model.UserName);
+
+                    await AddUserClaims(user);
+
                     if (this.Request.Query.Keys.Contains("ReturnUrl"))
                     {
                         return Redirect(this.Request.Query["ReturnUrl"].First());
@@ -96,6 +101,7 @@ namespace OmahRealEstate.Web.Controllers
 
                     if(result2.Succeeded)
                     {
+                        await AddUserClaims(user);
                         return RedirectToAction("Index","Home");
                     }
 
@@ -105,6 +111,68 @@ namespace OmahRealEstate.Web.Controllers
             }
 
             return View(model);
+        }
+
+        public async Task<IActionResult> UserProfile()
+        {
+            var user = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+            
+            var model = new ChangeUserViewModel();
+            
+            if (user != null)
+            {
+                model.FirstName = user.FirstName;
+                model.LastName = user.LastName;
+                model.PhoneNumber = user.PhoneNumber;
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UserProfile(ChangeUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+
+                if (user != null)
+                {
+                    user.FirstName = model.FirstName;
+                    user.LastName = model.LastName;
+                    user.PhoneNumber = model.PhoneNumber;
+
+
+                    var response = await _userHelper.UpdateUserAsync(user);
+
+                    await AddUserClaims(user);
+
+                    if (response.Succeeded)
+                    {
+                        return RedirectToAction("UserProfile");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, response.Errors.FirstOrDefault().Description);
+                    }
+
+                }
+
+            }
+            ViewData["ActiveTab"] = "profile-settings";
+            return View(model);
+
+        }
+
+        public async Task AddUserClaims(User user)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim("FirstName", user.FirstName),
+                new Claim("LastName", user.LastName)
+            };
+
+            await _userHelper.CreateUserClaims(user, false, claims);
         }
     }
 }

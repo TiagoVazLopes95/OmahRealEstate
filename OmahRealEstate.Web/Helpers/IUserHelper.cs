@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using OmahRealEstate.Web.Data.Entities;
 using OmahRealEstate.Web.Models;
+using System.Security.Claims;
 
 namespace OmahRealEstate.Web.Helpers
 {
@@ -13,5 +14,11 @@ namespace OmahRealEstate.Web.Helpers
         Task<SignInResult> LoginAsync(LoginViewModel model);
 
         Task LogoutAsync();
+
+        Task<IdentityResult> UpdateUserAsync(User user);
+
+        Task<IdentityResult> ChangePasswordAsync(User user, string oldPassword, string newPassword);
+
+        Task CreateUserClaims(User user, bool isPersistent, List<Claim> claimList);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using OmahRealEstate.Web.Data.Entities;
 using OmahRealEstate.Web.Models;
+using System.Security.Claims;
 
 namespace OmahRealEstate.Web.Helpers
 {
@@ -20,6 +21,16 @@ namespace OmahRealEstate.Web.Helpers
             return await _userManager.CreateAsync(user, password);
         }
 
+        public async Task<IdentityResult> ChangePasswordAsync(User user, string oldPassword, string newPassword)
+        {
+            return await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
+        }
+
+        public async Task CreateUserClaims(User user, bool isPersistent, List<Claim> claimList)
+        {
+            await _signInManager.SignInWithClaimsAsync(user, isPersistent, claimList);
+        }
+
         public async Task<User> GetUserByEmailAsync(string email)
         {
             return await _userManager.FindByEmailAsync(email);
@@ -33,6 +44,11 @@ namespace OmahRealEstate.Web.Helpers
         public async Task LogoutAsync()
         {
             await _signInManager.SignOutAsync();
+        }
+
+        public async Task<IdentityResult> UpdateUserAsync(User user)
+        {
+            return await _userManager.UpdateAsync(user);
         }
     }
 }
