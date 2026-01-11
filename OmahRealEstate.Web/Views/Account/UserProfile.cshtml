@@ -139,20 +139,14 @@
 												</div>
 												<div class="row mb-2">
 													<div class="col-sm-3 col-5">
-														<h6 class="f-w-500">Availability <span class="pull-end">:</span></h6>
-													</div>
-													<div class="col-sm-9 col-7">
-														<span>-</span>
-													</div>
-												</div>
-												<div class="row mb-2">
-													<div class="col-sm-3 col-5">
 														<h6 class="f-w-500">
 															Age <span class="pull-end">:</span>
 														</h6>
 													</div>
 													<div class="col-sm-9 col-7">
-														<span>-</span>
+														<span>
+															@($"{this.User.FindFirst("Age")?.Value}")
+														</span>
 													</div>
 												</div>
 												<div class="row mb-2">
@@ -161,16 +155,8 @@
 													</div>
 													<div class="col-sm-9 col-7">
 														<span>
-															-
+															@($"{this.User.FindFirst("City")?.Value}")
 														</span>
-													</div>
-												</div>
-												<div class="row mb-2">
-													<div class="col-sm-3 col-5">
-														<h6 class="f-w-500">Year Experience <span class="pull-end">:</span></h6>
-													</div>
-													<div class="col-sm-9 col-7">
-														<span>-</span>
 													</div>
 												</div>
 											</div>
@@ -198,30 +184,38 @@
 															<input asp-for="PhoneNumber" type="tel" placeholder="Phone" class="form-control">
 															<span asp-validation-for="PhoneNumber" class="text-warning"></span>
 														</div>
+														<div class="mb-3 col-md-6">
+															<label asp-for="Age" class="form-label">Age</label>
+															<input asp-for="Age" type="tel" placeholder="Age" class="form-control">
+															<span asp-validation-for="Age" class="text-warning"></span>
+														</div>
 													</div>
-@* 													<div class="row">
-														<div>
-															<div class="col-xl-6" style="border-color:lightgrey;border-style:solid;border-radius: 10px;border-width: thin">
+													<div class="row">
+														<div class="mb-3 col-md-6">
+															<label asp-for="City" class="form-label">City</label>
+															<input asp-for="City" type="tel" placeholder="City" class="form-control">
+															<span asp-validation-for="City" class="text-warning"></span>
+														</div>
+													</div>
+													<div class="row">													
+														<label class="form-label">Languages</label>
+															<div class="col-xl-6">
 																<div>
-																	<label class="form-label">Languages</label>
-																	<div class="mb-3">
-																		<select class="select2-width-50" style="width: 50%">
-																			<option value="AL">Alabama</option>
-																			<option value="WY">Wyoming</option>
-																		</select>
-																	</div>
-																	<div class="mb-3">
-																		<select class="select2-width-75" multiple="multiple" style="width: 75%">
-																			<option value="AL">Alabama</option>
-																			<option value="WY">Wyoming</option>
-																		</select>
+																	<div>
+																		<div class="mb-3">
+																			<select class="select2-width-75" multiple="multiple" style="width: 100%">
+																				<option value="AL">Alabama</option>
+																				<option value="WY">Wyoming</option>
+																			</select>
+																		</div>
 																	</div>
 																</div>																														
-															</div>
-														</div>
-													</div> *@
-														<input class="btn btn-primary" type="submit" value="Save Changes"/>												
-													</form>
+															</div>														
+													</div>
+														
+													<input class="btn btn-primary" type="submit" value="Save Changes"/>
+													<a asp-action="ChangePassword" type="button" class="btn btn-info">Change Password</a>
+												</form>
 												</div>
 											</div>
 										</div>
@@ -245,6 +239,7 @@
 
 	<script>
 		$(function() {
+            // Opens profile-setting tab if there are validation errors
 			var tab = '@ViewData["ActiveTab"]';
 			if (tab.length > 0) {
 				var profileSettings = document.querySelector('#p-tabs a[href="#' + tab + '"]');
@@ -253,6 +248,7 @@
 					var tabInstance = new bootstrap.Tab(profileSettings);
 					tabInstance.show();
 
+                    // Scroll to first validation error if any
 					var firstError = document.querySelector('.input-validation-error');
 
 					if(firstError) {

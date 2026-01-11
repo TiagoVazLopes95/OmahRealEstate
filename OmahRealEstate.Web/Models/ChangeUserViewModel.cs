@@ -16,5 +16,11 @@ namespace OmahRealEstate.Web.Models
         [Display(Name = "Phone Number")]
         [Phone]
         public string? PhoneNumber { get; set; }
+
+        [Required]
+        public string City { get; set; }
+
+        [Required]
+        public int Age { get; set; }
     }
 }

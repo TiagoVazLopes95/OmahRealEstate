@@ -33,6 +33,9 @@ namespace OmahRealEstate.Web.Data
                     LastName = "Lopes",
                     Email = "demoappemail.255@gmail.com",
                     UserName = "demoappemail.255@gmail.com",
+                    PhoneNumber = "1234567890",
+                    Age = 30,
+                    City = "Sample City"
                 };
 
                 var result = await _userHelper.AddUserAsync(user,"123456");

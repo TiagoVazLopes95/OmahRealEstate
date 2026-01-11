@@ -79,7 +79,9 @@ namespace OmahRealEstate.Web.Controllers
                         FirstName = model.FirstName,
                         LastName = model.LastName,
                         Email = model.UserName,
-                        UserName = model.UserName
+                        UserName = model.UserName,
+                        Age = model.Age,
+                        City = model.City,
                     };
 
                     var result = await _userHelper.AddUserAsync(user, model.Password);
@@ -124,6 +126,8 @@ namespace OmahRealEstate.Web.Controllers
                 model.FirstName = user.FirstName;
                 model.LastName = user.LastName;
                 model.PhoneNumber = user.PhoneNumber;
+                model.Age = user.Age;
+                model.City = user.City;
             }
 
             return View(model);
@@ -141,7 +145,8 @@ namespace OmahRealEstate.Web.Controllers
                     user.FirstName = model.FirstName;
                     user.LastName = model.LastName;
                     user.PhoneNumber = model.PhoneNumber;
-
+                    user.Age = model.Age;
+                    user.City = model.City;
 
                     var response = await _userHelper.UpdateUserAsync(user);
 
@@ -164,12 +169,46 @@ namespace OmahRealEstate.Web.Controllers
 
         }
 
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+                if (user != null)
+                {
+                    var result = await _userHelper.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("UserProfile");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, result.Errors.FirstOrDefault().Description);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "User not found.");
+                }
+            }
+            ViewData["ActiveTab"] = "change-password";
+            return View(model);
+        }
+
         public async Task AddUserClaims(User user)
         {
             var claims = new List<Claim>
             {
                 new Claim("FirstName", user.FirstName),
-                new Claim("LastName", user.LastName)
+                new Claim("LastName", user.LastName),
+                new Claim("Age", user.Age.ToString()),
+                new Claim("City", user.City),
             };
 
             await _userHelper.CreateUserClaims(user, false, claims);

@@ -22,6 +22,14 @@ namespace OmahRealEstate.Web.Models
         public string PhoneNumber { get; set; }
 
         [Required]
+        public int Age { get; set; }
+
+
+        [Required]
+        public string City { get; set; }
+
+
+        [Required]
         [MinLength(6)]
         public string Password { get; set; }
 
